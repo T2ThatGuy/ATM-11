@@ -35,7 +35,7 @@ if (Platform.isLoaded("mysticalagriculture")) {
       allthemods
         .custom({
           type: "mysticalagriculture:infusion",
-          input: { item: middle },
+          input: middle,
           ingredients: [
             item1,
             item2,

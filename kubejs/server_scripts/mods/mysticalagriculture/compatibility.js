@@ -73,6 +73,7 @@ const different = [
 if (Platform.isLoaded("mysticalagriculture")) {
   ServerEvents.recipes((allthemods) => {
     function mysticalTags(material, tag, tags) {
+
       let recipeEssence = ""
       let recipeTag = ""
       let recipeSeed = ""
@@ -89,8 +90,10 @@ if (Platform.isLoaded("mysticalagriculture")) {
         recipeTag = `#${tag}${material.resource}`
         if (material.seed !== undefined) {
           recipeSeed = `mysticalagriculture:${material.seed}_seeds`
-        } else {
+        } else if (Item.exists(`mysticalagriculture:${material.resource}_seeds`))  {
           recipeSeed = `mysticalagriculture:${material.resource}_seeds`
+        } else {
+          return
         }
       }
 
@@ -106,7 +109,7 @@ if (Platform.isLoaded("mysticalagriculture")) {
         if (Item.exists(`allthecompressed:${material.resource}_block_1x`)) {
           // use the allthecompressed block if it exists
           recipeTag = `allthecompressed:${material.resource}_block_1x`
-        } else if (material.block !== undefined) {
+        } else if (material.block !== undefined && Item.exists(material.block)) {
           // else use the provided block in useBlocks
           recipeTag = material.block
         } else {
